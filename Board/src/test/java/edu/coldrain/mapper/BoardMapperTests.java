@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import edu.coldrain.domain.BoardVO;
+import edu.coldrain.domain.Criteria;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,9 +29,19 @@ public class BoardMapperTests {
 	
 	@Test
 	public void testGetListWithPaging() {
-		List<BoardVO> list = mapper.getListWithPaging();
+		List<BoardVO> list = mapper.getListWithPaging(new Criteria(2, 10));
 		list.forEach(board -> log.info(board));
 		
+	}
+	
+	@Test
+	public void testCreate() {
+		BoardVO newBoard = new BoardVO();
+		newBoard.setTitle("새로운 게시글 입니다.");
+		newBoard.setContents("새로운 게시글 내용입니다.");
+		newBoard.setWriter("newbie");
+		
+		mapper.insert(newBoard);
 	}
 	
 	@Test

@@ -19,13 +19,21 @@
 			SELECT N.* FROM (
 			SELECT /*+ INDEX_DESC(TBL_BOARD PK_BOARD)*/ ROWNUM RN, TBL_BOARD.*
 			FROM TBL_BOARD
-			WHERE ROWNUM <= 20
+			WHERE ROWNUM <= #{pageNum} * #{amount}
 			) N
-			WHERE RN > 10
+			WHERE RN > (#{pageNum} - 1) * #{amount} 
 		]]>
 	</select>
 	
-	<!-- 특정 게시글 한 개 조회 -->
+	<!-- 게시글 추가 -->
+	<insert id="insert">
+		<![CDATA[
+			INSERT INTO TBL_BOARD (TITLE, CONTENTS, WRITER, REGDATE, UPDATEDATE, HIT)
+			VALUES (#{title}, #{contents}, #{writer}, SYSDATE, SYSDATE, 0)
+		]]>
+	</insert>
+	
+	<!-- 게시글 조회 -->
 	<select id="read" resultType="edu.coldrain.domain.BoardVO">
 		<![CDATA[
 			SELECT TBL_BOARD.* FROM TBL_BOARD
@@ -33,7 +41,16 @@
 		]]>
 	</select>
 	
-	<!-- 특정 게시글 삭제 -->
+	<!-- 게시글 수정 -->
+	<update id="update">
+		<![CDATA[
+			UPDATE TBL_BOARD 
+			SET TITLE = #{title}, CONTENTS = #{contents}, WRITER = #{writer}, UPDATEDATE = SYSDATE
+			WHERE BNO = #{bno}
+		]]>
+	</update>
+	
+	<!-- 게시글 삭제 -->
 	<delete id="delete">
 		<![CDATA[
 			DELETE FROM TBL_BOARD
@@ -42,13 +59,5 @@
 	</delete>
 	
 	
-	<!-- 특정 게시글 수정 -->
-	<update id="update">
-		<![CDATA[
-			UPDATE TBL_BOARD 
-			SET TITLE = #{title}, CONTENTS = #{contents}, WRITER = #{writer}, UPDATEDATE = SYSDATE
-			WHERE BNO = #{bno}
-		]]>
-	</update>
 	
 </mapper>
