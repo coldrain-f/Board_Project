@@ -25,7 +25,7 @@
                 		<tr>
 	                		<td><c:out value="${board.bno }" /></td>
 	                		<td>
-	                            <a href="/board/detail" class="text-reset">
+	                            <a href="/board/detail?bno=${board.bno }" class="text-reset">
 	                            	<c:out value="${board.title }" />
 	                            </a>
 	                            <span class="badge badge-info ml-3">New</span>
@@ -67,8 +67,8 @@
                 			</a>
                 		</li>
                 	</c:forEach>
-                	<li class="page-item disabled">
-                        <a class="page-link" href="#">다음</a>
+                	<li class="page-item ${pageMaker.next ? '' : 'disabled' }">
+                        <a class="page-link" href="/board/list?pageNum=${pageMaker.endPage + 1 }&amount=10">다음</a>
                     </li>
                     <li class="page-item disabled">
                         <a href="#" class="page-link" aria-label="Next">

@@ -38,16 +38,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void modify(BoardVO board) {
+	public boolean modify(BoardVO board) {
 		log.info("BoardServiceImpl.modify()");
-		mapper.update(board);
+		return (mapper.update(board) == 1);
 	}
 
 	@Override
-	public void remove(Long bno) {
+	public boolean remove(Long bno) {
 		log.info("BoardServiceImpl.remove()");
-		mapper.delete(bno);
-		
+		return (mapper.delete(bno) == 1);
 	}
 
 }

@@ -6,7 +6,7 @@
 
     <!-- 글 수정 폼 -->
     <div class="container mt-5">
-        <form action="" method="GET" class="form-inline">
+        <form action="/board/write" method="post" class="form-inline">
             <table class="table">
                 <tr>
                     <td>

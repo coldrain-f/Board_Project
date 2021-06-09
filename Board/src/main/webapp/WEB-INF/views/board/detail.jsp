@@ -1,24 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@include file="includes/header.jsp" %>
 
     <div class="container mt-5">
         <div class="row">
-            <h4 style="margin-left: 20px; margin-bottom: 20px">샘플 게시글입니다.</h4>
+            <h4 style="margin-left: 20px; margin-bottom: 20px"><c:out value="${board.title }" /></h4>
         </div>
         <div class="row mb-3">
             <span class="mr-2" style="margin-left: 22px">작성자</span>
-            <span class="mr-2 text-muted font-weight-bold">Mellow</span>
-            <span class="mr-2">2020년 12월 9일 5시 59분</span>
-            <span class="mr-2">조회 0회</span>
+            <span class="mr-2 text-muted font-weight-bold"><c:out value="${board.writer }" /></span>
+            <span class="mr-2"><fmt:formatDate value="${board.regdate }" pattern="yyyy년 M월 d일 a h시 m분" /></span>
+            <span class="mr-2">조회 <c:out value="${board.hit }" />회</span>
             <span class=>댓글 0건</span>
         </div>
 
         <div class="border-bottom"></div>
 
         <div class="row mt-4">
-            <span style="margin-left: 22px">반갑습니다. 게시글 내용물 예제입니다.</span>
+        		
+            <div style="margin-left: 22px"><c:out value="${board.contents }" escapeXml="false" /></div>
         </div>
 
         <!-- 덧글 폼 -->

@@ -28,8 +28,15 @@ public class PageDTO {
 		this.startPage = endPage - 9;
 		
 		//readEnd 구현해야 됨
+		this.realEnd = (int)Math.ceil( this.total / 10.0 );
+		
+		if(realEnd < endPage) {
+			endPage = realEnd;
+		}
 		
 		this.prev = this.startPage > 1;
+		
+		this.next = this.endPage < realEnd;
 		
 	}
 	
