@@ -11,6 +11,11 @@
             //게시판 수정, 삭제, 목록, 글쓰기 폼
             var boardActionForm = $("#boardActionForm");
 
+            //Criteria 정보
+            var pageNum = "<c:out value='${criteria.pageNum }' />";
+            var amount = "<c:out value='${criteria.amount }' />";
+	
+
             $("button").on("click", function(e) {
 
                 //버튼의 이벤트를 정지시킨다. ( 여기서는 submit을 정지 )
@@ -27,6 +32,8 @@
 
                 } else if(operation == "list") {
                     boardActionForm.find("#bno").remove();
+                    boardActionForm.append("<input type='hidden' name='pageNum' value='" + pageNum + "' />");
+                    boardActionForm.append("<input type='hidden' name='amount' value='" + amount + "' />");
                     boardActionForm.attr("action", "/board/list").attr("method", "get");
                     boardActionForm.submit();
 

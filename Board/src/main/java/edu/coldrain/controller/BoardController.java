@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -38,12 +39,12 @@ public class BoardController {
 	}
 	
 	@GetMapping("/write")
-	public void write() {
+	public void writeForm() {
 		
 	}
 	
 	@PostMapping("/write")
-	public String insertBoard(BoardVO board) {
+	public String write(BoardVO board) {
 		//일단은 회원가입이 정해지지 않아서 여기서 설정해 준다.
 		log.info("title = " + board.getTitle());
 		log.info("contents = " + board.getContents());
@@ -56,9 +57,10 @@ public class BoardController {
 	}
 	
 	@GetMapping("/detail")
-	public void detail(Long bno, Model model) {
+	public void detail(Long bno, @ModelAttribute Criteria criteria, Model model) {
 		log.info("BoardController.detail()");
 		log.info("bno = " + bno);
+		log.info("criteria = " + criteria);
 		
 		BoardVO board = service.get(bno);
 		model.addAttribute("board", board);
@@ -80,13 +82,26 @@ public class BoardController {
 	}
 	
 	@GetMapping("/modify")
-	public void modify(Long bno, Model model) {
-		log.info("BoardController.modify()");
+	public void modifyForm(Long bno, Model model) {
+		log.info("BoardController.modifyForm()");
 		log.info("bno = " + bno);
 		
 		BoardVO board = service.get(bno);
 		log.info("board = " + board);
 		
 		model.addAttribute("board", board);
+	}
+	
+	@PostMapping("/modify")
+	public String modify(BoardVO board) {
+		log.info("BoardController.modify()");
+		
+		boolean success = service.modify(board);
+		if(success) {
+			log.info(board.getBno() + "번 수정에 성공했습니다.");
+		} else {
+			log.info(board.getBno() + "번 수정에 실패했습니다.");
+		}
+		return "redirect:/board/list";
 	}
 }

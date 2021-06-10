@@ -6,7 +6,7 @@
 
     <!-- 글 수정 폼 -->
     <div class="container mt-5">
-        <form action="" method="GET" class="form-inline">
+        <form action="/board/modify" method="post" class="form-inline">
             <table class="table">
                 <tr>
                     <td>
@@ -22,6 +22,9 @@
                 </tr>
                 <tr>
                     <td class="text-right"> 
+                    	<input type="hidden" name="bno" value="<c:out value='${board.bno }' />" />
+                    	<input type="hidden" name="writer" value="<c:out value='${board.writer }' />" />
+                    
                         <input type="submit" class="btn btn-primary mr-1" value="수정" />
                         <button type="button" class="btn btn-primary" onclick="location.href='/board/list'">취소</button>
                     </td>

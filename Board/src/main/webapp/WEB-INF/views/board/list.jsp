@@ -25,7 +25,7 @@
                 		<tr>
 	                		<td><c:out value="${board.bno }" /></td>
 	                		<td>
-	                            <a href="/board/detail?bno=${board.bno }" class="text-reset">
+	                            <a href="/board/detail?bno=<c:out value='${board.bno }' />&pageNum=<c:out value='${criteria.pageNum }' />&amount=<c:out value='${criteria.amount }' />" class="text-reset">
 	                            	<c:out value="${board.title }" />
 	                            </a>
 	                            <span class="badge badge-info ml-3">New</span>
