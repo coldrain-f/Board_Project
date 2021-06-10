@@ -1,5 +1,7 @@
 package edu.coldrain.mapper;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -20,6 +22,11 @@ public class BoardMapperTests {
 	
 	@Autowired
 	private BoardMapper mapper;
+	
+	@Test
+	public void testExist() {
+		assertNotNull(mapper);
+	}
 	
 	@Test
 	public void testGetList() {

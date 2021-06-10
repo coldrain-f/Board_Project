@@ -30,8 +30,9 @@ public class BoardController {
 		log.info("criteria = " + criteria);
 		
 		List<BoardVO> boardList = service.getList(criteria);
-		//realEnd 구현해야 됨
-		PageDTO pageMaker = new PageDTO(criteria, 200);
+		
+		int total = service.getTotal(criteria);
+		PageDTO pageMaker = new PageDTO(criteria, total);
 		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pageMaker", pageMaker);

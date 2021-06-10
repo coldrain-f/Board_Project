@@ -49,4 +49,10 @@ public class BoardServiceImpl implements BoardService {
 		return (mapper.delete(bno) == 1);
 	}
 
+	@Override
+	public int getTotal(Criteria criteria) {
+		log.info("BoardServiceImpl.getTotal()");
+		return mapper.getTotalCount(criteria);
+	}
+
 }

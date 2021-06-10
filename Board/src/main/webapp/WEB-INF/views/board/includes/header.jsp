@@ -99,6 +99,7 @@
                         <select name="" id="" class="custom-select w-25">
                             <option value="1">제목</option>
                             <option value="2">작성자</option>
+                            <option value="3">내용</option>
                         </select>
                         
                         <input class="form-control w-50" type="search" placeholder="Search" aria-label="Search">

@@ -58,6 +58,13 @@
 		]]>
 	</delete>
 	
+	<!-- 모든 게시글 개수 -->
+	<select id="getTotalCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM TBL_BOARD WHERE BNO > 0
+		]]>
+	</select>
+	
 	
 	
 </mapper>
