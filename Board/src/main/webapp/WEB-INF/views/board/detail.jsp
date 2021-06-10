@@ -5,6 +5,42 @@
 
 <%@include file="includes/header.jsp" %>
 
+    <script>
+        $(document).ready(function(){
+
+            //게시판 수정, 삭제, 목록, 글쓰기 폼
+            var boardActionForm = $("#boardActionForm");
+
+            $("button").on("click", function(e) {
+
+                //버튼의 이벤트를 정지시킨다. ( 여기서는 submit을 정지 )
+                e.preventDefault();
+
+                var operation = $(this).data("oper");
+
+                if(operation == "modify") {
+                    boardActionForm.attr("action", "/board/modify").attr("method", "get");
+                    boardActionForm.submit();
+                } else if(operation == "remove") {
+                    boardActionForm.attr("action", "/board/remove").attr("method", "post");
+                    boardActionForm.submit();
+
+                } else if(operation == "list") {
+                    boardActionForm.find("#bno").remove();
+                    boardActionForm.attr("action", "/board/list").attr("method", "get");
+                    boardActionForm.submit();
+
+                } else if(operation == "write") {
+                    boardActionForm.find("#bno").remove();
+
+                    boardActionForm.attr("action", "/board/write").attr("method", "get");
+                    boardActionForm.submit();
+                }
+            });
+        });
+
+    </script>
+
     <div class="container mt-5">
         <div class="row">
             <h4 style="margin-left: 20px; margin-bottom: 20px"><c:out value="${board.title }" /></h4>
@@ -103,10 +139,13 @@
 
                 <tr class="text-center">
                     <td colspan="3">
-                        <button type="button" class="btn btn-outline-primary" onclick="location.href='/board/modify'">수정</button>
-                        <button type="button" class="btn btn-outline-primary" onclick="alert('준비중입니다.')">삭제</button>
-                        <button type="button" class="btn btn-outline-primary" onclick="location.href='/board/list'">목록</button>
-                        <button type="button" class="btn btn-outline-primary" onclick="location.href='/board/write'">글작성</button>
+                    	<form action="" method="post" id="boardActionForm">
+                            <input type="hidden" name="bno" id="bno" value="<c:out value='${board.bno }' />">
+	                        <button type="submit" class="btn btn-outline-primary" data-oper="modify">수정</button>
+	                        <button type="submit" class="btn btn-outline-primary" data-oper="remove">삭제</button>
+	                        <button type="submit" class="btn btn-outline-primary" data-oper="list">목록</button>
+	                        <button type="submit" class="btn btn-outline-primary" data-oper="write">글작성</button>
+                    	</form>
                     </td>
                 </tr>
 

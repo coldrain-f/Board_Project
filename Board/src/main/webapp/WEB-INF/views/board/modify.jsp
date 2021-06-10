@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@include file="includes/header.jsp" %>
 
@@ -9,17 +10,19 @@
             <table class="table">
                 <tr>
                     <td>
-                        <input type="text" class="form-control w-100" name="title" value="샘플 게시글입니다." placeholder="Title" autocomplete="off" />
+                        <input type="text" class="form-control w-100" name="title" 
+                        	value="<c:out value='${board.title }' />" placeholder="Title" autocomplete="off" />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <textarea class="summernote form-control w-100" name="contents" cols="30" rows="15">반갑습니다. 게시글 내용물 예제입니다.</textarea>
+                        <textarea class="summernote form-control w-100" name="contents" 
+                        	cols="30" rows="15"><c:out value="${board.contents }" /></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td class="text-right"> 
-                        <input type="submit" class="btn btn-primary mr-1" value="등록" />
+                        <input type="submit" class="btn btn-primary mr-1" value="수정" />
                         <button type="button" class="btn btn-primary" onclick="location.href='/board/list'">취소</button>
                     </td>
                 </tr>

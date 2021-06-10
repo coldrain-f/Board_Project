@@ -64,8 +64,29 @@ public class BoardController {
 		model.addAttribute("board", board);
 	}
 	
-	@GetMapping("/modify")
-	public void modify() {
+	@PostMapping("/remove")
+	public String remove(Long bno) {
+		log.info("BoardController.remove()");
+		log.info("bno = " + bno);
 		
+		boolean success = service.remove(bno);
+		if(success) {
+			log.info(bno + "번 삭제에 성공했습니다.");
+		} else {
+			log.info(bno + "번 삭제에 실패했습니다.");
+		}
+		
+		return "redirect:/board/list";
+	}
+	
+	@GetMapping("/modify")
+	public void modify(Long bno, Model model) {
+		log.info("BoardController.modify()");
+		log.info("bno = " + bno);
+		
+		BoardVO board = service.get(bno);
+		log.info("board = " + board);
+		
+		model.addAttribute("board", board);
 	}
 }
